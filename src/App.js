@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 import {Header} from "./components/index";
 import {Cart} from "./pages";
 import {Route} from "react-router-dom";
 import Home from "./pages/Home";
 
-class App extends React.Component {
+class App extends Component {
     state = {
         categories: {
             activeItem : null,
@@ -28,6 +28,8 @@ class App extends React.Component {
 
     }
 
+
+
     onSelectItems = (item, place) =>  {
         place.setState( (state) =>({
             activeItem : item
@@ -35,6 +37,7 @@ class App extends React.Component {
     }
 
     render() {
+
         return (
             <div className="App">
                 <div className="wrapper">
@@ -43,25 +46,11 @@ class App extends React.Component {
                         onSelectItems={this.onSelectItems}
                     />
                     <div className="content">
-                        {/*<Route*/}
-                        {/*    exact*/}
-                        {/*    path="/"*/}
-                        {/*    component={Home}*/}
-                        {/*/>*/}
-                        <Route
-                            exact
-                            path="/"
-                        >
-                            <Home state={this.state}
-                                  onSelectItems={this.onSelectItems}
-                            />
-
-                        </Route>
+                        <Route exact path="/" render={() => <Home
+                            state={this.state}
+                            onSelectItems={this.onSelectItems}/>}
+                        />
                         <Route exact path="/cart" component={Cart}/>
-                        {/*<Home*/}
-                        {/*    state={this.state}*/}
-                        {/*    onSelectItems={this.onSelectItems}*/}
-                        {/*/>*/}
                     </div>
                 </div>
             </div>
