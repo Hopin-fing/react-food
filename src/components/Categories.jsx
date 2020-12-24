@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Categories = ({items, place}) => {
+const Categories = ({items}) => {
 
     const [activeItem, setActiveItem] = useState(null)
 
@@ -19,11 +19,11 @@ const Categories = ({items, place}) => {
                         ? "active"
                         : null
                     }
-                    onClick={() => onSelectItem(null, place)}
+                    onClick={() => onSelectItem(null)}
                 >Все</li>
                 {items &&
                     items.map((item, index) =>
-                    <li onClick={() => onSelectItem(index, place)}
+                    <li onClick={() => onSelectItem(index)}
                         key={`${item}_${index}`}
                         className={
                             activeItem === index

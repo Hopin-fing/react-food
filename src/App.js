@@ -1,57 +1,28 @@
 import React, {Component} from 'react'
-
 import {Header} from "./components/index";
 import {Cart} from "./pages";
 import {Route} from "react-router-dom";
 import Home from "./pages/Home";
+import axios from "axios";
+import {setPizzas as setPizzasAction} from "./redux/actions/pizzas";
+import {connect} from "react-redux";
 
 class App extends Component {
-    state = {
-        categories: {
-            activeItem : null,
-            items: [
-                'Мясные',
-                'Вегетарианская',
-                'Гриль',
-                'Острые',
-                'Закрытые'
-            ]
-        },
-        sortPopup: {
-            activeItem : 0,
-            itemsPopup: [
-                'популярности',
-                'цене',
-                'алфавиту'
-            ]
-        }
-
+    componentDidMount() {
+        axios.get('http://localhost:3000/db.json').then(({data}) => {
+            this.props.setPizzas(data.pizzas)
+        })
     }
 
-
-
-    onSelectItems = (item, place) =>  {
-        place.setState( (state) =>({
-            activeItem : item
-        }))
-    }
 
     render() {
-
         return (
-            <div className="App">
-                <div className="wrapper">
-                    <Header
-                        state={this.state}
-                        onSelectItems={this.onSelectItems}
-                    />
-                    <div className="content">
-                        <Route exact path="/" render={() => <Home
-                            state={this.state}
-                            onSelectItems={this.onSelectItems}/>}
-                        />
-                        <Route exact path="/cart" component={Cart}/>
-                    </div>
+
+            <div className="wrapper">
+                <Header/>
+                <div className="content">
+                    <Route exact path="/" render={() => <Home items={this.props.items}/>}/>
+                    <Route exact path="/cart" component={Cart}/>
                 </div>
             </div>
         );
@@ -59,6 +30,20 @@ class App extends Component {
 
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        items: state.pizzas.items
+    }
+
+}
+
+const mapDispatchToprops = dispatch => {
+    return {
+        setPizzas: (items) => dispatch(setPizzasAction(items)),
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToprops)(App);
 
 
