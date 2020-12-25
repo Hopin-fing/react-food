@@ -3,7 +3,3 @@ export const setPizzas = (items) => ({
     payload: items
 })
 
-export const setCategory = (index) => ({
-    type:'SET_CATEGORY',
-    payload: index
-})

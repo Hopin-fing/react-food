@@ -1,11 +1,11 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React from 'react';
 
 const SortPopup = ({items}) => {
-    const [visiblePopup, setVisiblePopup] = useState(false)
-    const [activeItem, setActiveItem] = useState(0)
+    const [visiblePopup, setVisiblePopup] = React.useState(false)
+    const [activeItem, setActiveItem] = React.useState(0)
 
 
-    const sortRef = useRef(null);
+    const sortRef = React.useRef(null);
     const activeLabel = items[activeItem].name
 
 
@@ -26,7 +26,7 @@ const SortPopup = ({items}) => {
 
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         document.body.addEventListener('click', handleOutsideClick)
     }, [])
 

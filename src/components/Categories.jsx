@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const Categories = ({items}) => {
+const Categories = ({items, onSelectClick }) => {
 
-    const [activeItem, setActiveItem] = useState(null)
+    const [activeItem, setActiveItem] = React.useState(null)
 
     const onSelectItem = item => {
+        onSelectClick(item)
         setActiveItem(item);
     }
 
