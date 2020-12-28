@@ -1,23 +1,12 @@
 import React from 'react'
 import {Route} from "react-router-dom";
-import {useDispatch} from "react-redux";
 
 import {Header} from "./components/index";
 import {Cart} from "./pages";
 import Home from "./pages/Home";
-import {fetchPizzas} from "./redux/actions/pizzas";
 
 
 const App = () => {
-    const dispatch = useDispatch()
-
-
-    React.useEffect(() => {
-        dispatch(fetchPizzas())
-
-    }, []);
-
-
 
     return (
 
