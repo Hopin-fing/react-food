@@ -1,6 +1,9 @@
 const initialState = {
     category: null,
-    sortBy: 'popular'
+    sortBy: {
+        type: 'popular',
+        order: 'desc'
+    }
 
 }
 const filtersReducer = (state = initialState, action) => {
@@ -9,6 +12,10 @@ const filtersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 sortBy: action.payload
+                // sortBy:{
+                //     type: action.payload,
+                //     order: action.payload
+                // }
             };
         case 'SET_CATEGORY':
             return {
